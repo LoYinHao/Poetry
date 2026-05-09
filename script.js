@@ -133,6 +133,10 @@ function renderGrid() {
             </div>
         `;
         
+        cardContainer.addEventListener('click', function() {
+            this.classList.toggle('flipped');
+        });
+        
         grid.appendChild(cardContainer);
     });
     
@@ -148,35 +152,33 @@ function renderPagination() {
     const totalPages = Math.ceil(currentData.length / itemsPerPage);
     if (totalPages <= 1) return; // Hide pagination if only 1 page
     
-    const prevBtn = document.createElement('button');
-    prevBtn.className = 'page-btn';
-    prevBtn.textContent = '上一頁';
-    prevBtn.disabled = currentPage === 1;
-    prevBtn.onclick = () => {
-        if (currentPage > 1) {
-            currentPage--;
-            renderGrid();
-            window.scrollTo({ top: document.getElementById('category-tabs').offsetTop - 50, behavior: 'smooth' });
+    const createBtn = (text, disabled, onClick, isActive = false) => {
+        const btn = document.createElement('button');
+        btn.className = 'page-btn' + (isActive ? ' active' : '');
+        btn.textContent = text;
+        btn.disabled = disabled;
+        if (!disabled) {
+            btn.onclick = () => {
+                onClick();
+                renderGrid();
+                window.scrollTo({ top: document.getElementById('category-tabs').offsetTop - 50, behavior: 'smooth' });
+            };
         }
+        return btn;
     };
+
+    paginationContainer.appendChild(createBtn('上一頁', currentPage === 1, () => currentPage--));
     
-    const pageInfo = document.createElement('span');
-    pageInfo.className = 'page-info';
-    pageInfo.textContent = `第 ${currentPage} / ${totalPages} 頁`;
-    
-    const nextBtn = document.createElement('button');
-    nextBtn.className = 'page-btn';
-    nextBtn.textContent = '下一頁';
-    nextBtn.disabled = currentPage === totalPages;
-    nextBtn.onclick = () => {
-        if (currentPage < totalPages) {
-            currentPage++;
-            renderGrid();
-            window.scrollTo({ top: document.getElementById('category-tabs').offsetTop - 50, behavior: 'smooth' });
+    for (let i = 1; i <= totalPages; i++) {
+        if (totalPages <= 7 || (i === 1 || i === totalPages || (i >= currentPage - 1 && i <= currentPage + 1))) {
+            paginationContainer.appendChild(createBtn(i.toString(), false, () => currentPage = i, currentPage === i));
+        } else if (i === currentPage - 2 || i === currentPage + 2) {
+            const ellipsis = document.createElement('span');
+            ellipsis.className = 'page-info';
+            ellipsis.textContent = '...';
+            paginationContainer.appendChild(ellipsis);
         }
-    };
+    }
     
-    paginationContainer.appendChild(prevBtn);
-    paginationContainer.appendChild(pageInfo);
-    paginationContainer.appendChild(nextBtn);
+    paginationContainer.appendChild(createBtn('下一頁', currentPage === totalPages, () => currentPage++));
 }
