@@ -8,7 +8,10 @@
 body {
     font-family: 'Noto Serif TC', serif;
     background-color: #f4f1ea; /* Rice paper base */
-    background-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100" height="100" filter="url(%23noise)" opacity="0.05"/></svg>');
+    background-image: url('Image/background.png'); /* Light landscape background */
+    background-size: cover;
+    background-position: center top;
+    background-attachment: fixed;
     color: #2c2c2c; /* Ink black */
     line-height: 1.6;
 }
@@ -23,9 +26,7 @@ h1, h2, h3 {
     text-align: center;
     padding: 6rem 2rem 4rem;
     position: relative;
-    background: linear-gradient(to bottom, rgba(244, 241, 234, 0), rgba(244, 241, 234, 1)),
-                url('data:image/svg+xml;utf8,<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg"><path d="M10,10 Q50,90 90,10" stroke="%23dfd8c8" fill="none"/></svg>') no-repeat center top;
-    background-size: cover;
+    background: transparent;
 }
 
 .site-title {
@@ -68,6 +69,53 @@ h1, h2, h3 {
     max-width: 1200px;
     margin: 0 auto;
     padding: 2rem;
+}
+
+/* Author Profile */
+.author-profile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    margin-bottom: 4rem;
+    padding: 2.5rem;
+    background: rgba(255, 253, 248, 0.65); /* Glassmorphism */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+}
+
+.author-image-container {
+    flex-shrink: 0;
+}
+
+.author-image {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 6px solid rgba(255, 255, 255, 0.9);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.author-bio {
+    max-width: 600px;
+}
+
+.author-bio h2 {
+    font-size: 1.8rem;
+    color: #8b2828;
+    margin-bottom: 1rem;
+    letter-spacing: 2px;
+}
+
+.author-bio p {
+    font-size: 1.1rem;
+    color: #444;
+    line-height: 1.8;
+    text-align: justify;
 }
 
 /* Tabs */
@@ -154,8 +202,11 @@ h1, h2, h3 {
 .card-front {
     justify-content: center;
     align-items: center;
-    background-image: radial-gradient(#e5dfd3 1px, transparent 1px);
+    background-image: radial-gradient(rgba(229, 223, 211, 0.5) 1px, transparent 1px);
     background-size: 20px 20px;
+    background-color: rgba(255, 253, 248, 0.85); /* Slightly transparent for glassmorphism */
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
 }
 
 .poem-category {
@@ -188,7 +239,9 @@ h1, h2, h3 {
     transform: rotateY(180deg);
     justify-content: flex-start;
     align-items: flex-end;
-    background-color: #fbfaf6;
+    background-color: rgba(251, 250, 246, 0.9); /* Slightly transparent */
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
 }
 
 .poem-full {
@@ -281,5 +334,12 @@ h1, h2, h3 {
     
     .seal {
         right: 10%;
+    }
+    
+    .author-profile {
+        flex-direction: column;
+        text-align: center;
+        gap: 1.5rem;
+        padding: 1.5rem;
     }
 }
