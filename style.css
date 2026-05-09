@@ -116,6 +116,11 @@ h1, h2, h3 {
     color: #444;
     line-height: 1.8;
     text-align: justify;
+    margin-bottom: 1rem;
+}
+
+.author-bio p:last-child {
+    margin-bottom: 0;
 }
 
 /* Tabs */
