@@ -1,5 +1,5 @@
 let currentPage = 1;
-const itemsPerPage = 5;
+const itemsPerPage = 6;
 let currentData = [];
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -77,6 +77,7 @@ function renderTabs(allData) {
         allBtn.classList.add('active');
         currentData = allData;
         currentPage = 1;
+        document.querySelector('.container').classList.add('profile-to-bottom');
         renderGrid();
     };
     tabsContainer.appendChild(allBtn);
@@ -91,6 +92,7 @@ function renderTabs(allData) {
             btn.classList.add('active');
             currentData = allData.filter(item => item['類別'] === category);
             currentPage = 1;
+            document.querySelector('.container').classList.add('profile-to-bottom');
             renderGrid();
         };
         tabsContainer.appendChild(btn);
