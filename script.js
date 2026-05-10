@@ -113,6 +113,11 @@ function renderGrid() {
         // Extract a short snippet (first line)
         const snippet = contentHtml.split('，')[0] + '...';
 
+        const sourceText = item['創作年份/來源'] || '';
+        const metaHtml = (sourceText && sourceText !== '未詳') 
+            ? `<div class="poem-meta"><span class="source">來源：${sourceText}</span></div>` 
+            : '';
+
         const cardContainer = document.createElement('div');
         cardContainer.className = 'card-container';
         
@@ -125,10 +130,7 @@ function renderGrid() {
                 </div>
                 <div class="card-back">
                     <div class="poem-full">${item['內文'].replace(/<br>/g, '<br/>')}</div>
-                    <div class="poem-meta">
-                        <span class="source">來源：${item['創作年份/來源']}</span>
-                        <span class="annotation">註：${item['註釋']}</span>
-                    </div>
+                    ${metaHtml}
                 </div>
             </div>
         `;
